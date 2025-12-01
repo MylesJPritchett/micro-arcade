@@ -47,14 +47,32 @@
           // No game specified, show the dashboard
           document.title = "Game Collection";
           const gameCards = games
-            .map(
-              (game) => `
+            .map((game) => {
+              const title = game.charAt(0).toUpperCase() + game.slice(1);
+              const keyPrefix = `crisp-game-${title}-`;
+              let highScore = 0;
+              for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(keyPrefix)) {
+                  try {
+                    const value = JSON.parse(localStorage.getItem(key));
+                    if (value && value.highScore) {
+                      highScore = value.highScore;
+                      break;
+                    }
+                  } catch (e) {
+                    // Ignore if parsing fails
+                  }
+                }
+              }
+              return `
           <a href="?game=${game}" class="game-card">
               <div class="placeholder">${game}</div>
               <h2>${game}</h2>
+              <p class="high-score">High Score: ${highScore}</p>
           </a>
-        `
-            )
+        `;
+            })
             .join("");
 
           document.body.innerHTML = `
@@ -101,9 +119,15 @@
     .game-card h2 {
         font-size: 1.2em;
         margin: 0;
-        padding: 15px;
+        padding: 15px 15px 5px;
         text-align: center;
         text-transform: capitalize;
+    }
+    .high-score {
+        margin: 0;
+        padding: 0 15px 15px;
+        text-align: center;
+        color: #555;
     }
 </style>
 <h1>Game Collection</h1>
