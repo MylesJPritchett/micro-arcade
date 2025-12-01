@@ -10,3 +10,4 @@ coverage/
 
 # Vitest snapshots (if any)
 **/__snapshots__/
+.aider*
