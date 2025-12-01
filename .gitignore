@@ -1,0 +1,12 @@
+node_modules/
+.vscode/
+.claude/
+.serena/
+package-lock.json
+npm-debug.log
+
+# Test coverage
+coverage/
+
+# Vitest snapshots (if any)
+**/__snapshots__/
