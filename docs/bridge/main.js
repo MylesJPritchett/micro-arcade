@@ -21,6 +21,8 @@ let scrollSpeed = 1.5;
 
 let target;
 
+let falling;
+
 function update() {
   if (!ticks) {
     platforms = [vec(10, 55)];
@@ -31,6 +33,8 @@ function update() {
     }
 
     target = platforms[1];
+    falling = false;
+
   }
 
   if (scrollRemaining > 0) {
@@ -39,18 +43,19 @@ function update() {
     platforms.forEach((p) => p.x -= delta);
   }
 
-  if (input.isJustPressed) {
+  if (input.isJustPressed && !falling) {
     bridge.length = 0;
   }
 
 
-  if (input.isPressed) {
+  if (input.isPressed && !falling) {
     bridge.angle = -PI / 2;
     bridge.length += 0.5;
   }
 
-  if (bridge.length > 0 && !input.isPressed) {
+  if (bridge.length > 0 && (!input.isPressed || falling)) {
     bridge.angle += 0.05;
+    falling = true
   }
 
 
@@ -78,6 +83,7 @@ function update() {
 
   if (success) {
     bridge.length = 0;
+    falling = false;
     addScore(1);
     target = platforms[2];
     scrollRemaining = platforms[1].x - platforms[0].x;
