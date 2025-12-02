@@ -5,7 +5,11 @@ description = `
 
 characters = [];
 
-options = {};
+options = {
+  isCapturing: true,
+  isCapturingGameCanvasOnly: true
+};
+
 
 function update() {
   if (!ticks) {
