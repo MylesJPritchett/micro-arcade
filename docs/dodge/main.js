@@ -12,13 +12,17 @@ options = {};
 let blocks;
 let nextBlockDist;
 
-let player = vec(50, 90);
+let player;
 let speed = 1;
 
 function update() {
   if (!ticks) {
-    blocks = [vec(50, 50)];
+    blocks = [];
+    for (let i = 0; i < 5; i++) {
+      blocks.push(vec(rnd(5, 95), rnd(10, 70))); // y between 60–95
+    }
     nextBlockDist = 10;
+    player = vec(50, 90);
   }
   let scr = 0.1 + (score / 1000);
 
@@ -47,9 +51,13 @@ function update() {
     speed = -speed;
   }
 
-  if (player.x < 5 || player.x > 95) {
-    speed = -speed;
+  if (player.x < 3 || player.x > 97) {
+    end();
   }
+  color("black")
+  rect(0, 0, 1, 100)
+  rect(100, 0, -1, 100)
+  rect(0, 92, 100, 10)
 
 
 }
