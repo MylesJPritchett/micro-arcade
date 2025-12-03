@@ -163,13 +163,13 @@ function update() {
 
 
       if (parryFrame > 10) {
-        playerState = "parryRecovory";
+        playerState = "parryRecovery";
         parryRecoveryFrame = 0;
       }
       parryFrame++;
 
       break;
-    case "parryRecovory":
+    case "parryRecovery":
       color("light_black")
       line(30, 47, 39, 13)
 
@@ -308,13 +308,13 @@ function update() {
 
 
       if (EparryFrame > 5) {
-        enemyState = "parryRecovory";
+        enemyState = "parryRecovery";
         EparryRecoveryFrame = 0;
       }
       EparryFrame++;
 
       break;
-    case "parryRecovory":
+    case "parryRecovery":
       color("light_black")
       line(100 - 30, 47, 100 - 39, 13)
 
@@ -365,7 +365,7 @@ function update() {
         enemyHealth--;
         break;
 
-      case "parryRecovory":
+      case "parryRecovery":
         enemyHealth--;
         break;
 
@@ -404,7 +404,7 @@ function update() {
         playerHealth--;
         break;
 
-      case "parryRecovory":
+      case "parryRecovery":
         playerHealth--;
         break;
 
