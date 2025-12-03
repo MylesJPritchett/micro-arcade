@@ -196,57 +196,56 @@ function update() {
       color("light_black")
       line(100 - 25, 50, 100 - 30, 70)
       let action = rndi(0, 30);
-      switch (action) {
-        case 0:
-          enemyState = "block"
-          break;
-        case 1:
-          enemyState = "block"
-          break;
-        case 2:
-          enemyState = "block"
-          break;
-        case 3:
-          enemyState = "idle"
-          break;
-        case 4:
-          enemyState = "idle"
-          break;
+      if (enemyFrame > 20) {
+        switch (action) {
+          case 0:
+            enemyState = "block"
+            break;
+          case 1:
+            enemyState = "block"
+            break;
+          case 2:
+            enemyState = "block"
+            break;
+          case 3:
+            enemyState = "idle"
+            break;
+          case 4:
+            enemyState = "idle"
+            break;
 
+        }
       }
-
-
-
-
+      enemyFrame++;
       break;
     case "block":
       color("light_black")
       line(100 - 30, 50, 100 - 45, 20)
 
       let blockAction = rndi(0, 120);
-      switch (blockAction) {
-        case 0:
-          enemyState = "startUp"
-          enemyFrame = 0
-          break;
-        case 1:
-          enemyState = "startUp"
+      if (enemyFrame > 20) {
+        switch (blockAction) {
+          case 0:
+            enemyState = "startUp"
+            enemyFrame = 0
+            break;
+          case 1:
+            enemyState = "startUp"
 
-          enemyFrame = 0
-          break;
-        case 2:
-          enemyState = "parry"
-          enemyFrame = 0
-          break;
+            enemyFrame = 0
+            break;
+          case 2:
+            enemyState = "parry"
+            enemyFrame = 0
+            break;
 
-        default:
-          enemyState = "block"
-          break;
+          default:
+            enemyState = "block"
+            break;
 
+        }
       }
-
-
-
+      enemyFrame++;
       break;
     case "startUp":
       color("light_black")
