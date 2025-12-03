@@ -213,6 +213,9 @@ function update() {
           case 4:
             enemyState = "idle"
             break;
+          default:
+            enemyState = "idle"
+            break;
 
         }
       }
