@@ -22,7 +22,7 @@ let timer;
 
 function update() {
   if (!ticks) {
-    timer = 30 * 60
+    timer = 15 * 60
     potatos = []
     squashed = []
     nextPotato = 50;
@@ -36,7 +36,7 @@ function update() {
     }
   }
 
-  if ((timer / 60) < 10) {
+  if ((timer / 60) < 5) {
     color("red")
   } else {
 
