@@ -61,6 +61,7 @@ function update() {
     addScore(1)
     playerHealth++;
     enemyHealth = 5;
+    enemyState = "idle"
   }
 
   color("cyan")
