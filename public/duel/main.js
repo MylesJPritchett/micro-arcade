@@ -24,19 +24,9 @@ let enemyState;
 let enemyHealth;
 let holdTime;
 
-let startUpFrame;
-let activeFrame;
-let recoveryFrame;
-let parryFrame;
-let parryRecoveryFrame;
-let stunnedFrame;
+let playerFrame;
 
-let EstartUpFrame;
-let EactiveFrame;
-let ErecoveryFrame;
-let EparryFrame;
-let EparryRecoveryFrame;
-let EstunnedFrame;
+let enemyFrame;
 
 
 let didHit;
@@ -51,6 +41,8 @@ function update() {
     enemyHealth = 5;
     didHit = false;
     EdidHit = false;
+    playerFrame = 0;
+    enemyFrame = 0;
   }
 
   if (playerHealth == 0) {
@@ -104,10 +96,10 @@ function update() {
       if (input.isJustReleased) {
         if (holdTime < 30) {
           playerState = "startUp"
-          startUpFrame = 0
+          playerFrame = 0
         } else {
           playerState = "parry"
-          parryFrame = 0
+          playerFrame = 0
         }
       }
 
@@ -118,12 +110,12 @@ function update() {
       line(25, 50, 45, 45)
 
 
-      if (startUpFrame > 5) {
+      if (playerFrame > 5) {
         didHit = false
         playerState = "active"
-        activeFrame = 0
+        playerFrame = 0
       }
-      startUpFrame++;
+      playerFrame++;
 
       break;
     case "active":
@@ -133,11 +125,11 @@ function update() {
 
 
 
-      if (activeFrame > 5) {
+      if (playerFrame > 5) {
         playerState = "recovery"
-        recoveryFrame = 0
+        playerFrame = 0
       }
-      activeFrame++;
+      playerFrame++;
 
       break;
     case "recovery":
@@ -148,10 +140,10 @@ function update() {
 
 
 
-      if (recoveryFrame > 5) {
+      if (playerFrame > 5) {
         playerState = "idle"
       }
-      recoveryFrame++;
+      playerFrame++;
 
       break;
     case "parry":
@@ -162,11 +154,11 @@ function update() {
 
 
 
-      if (parryFrame > 10) {
+      if (playerFrame > 10) {
         playerState = "parryRecovery";
-        parryRecoveryFrame = 0;
+        playerFrame = 0;
       }
-      parryFrame++;
+      playerFrame++;
 
       break;
     case "parryRecovery":
@@ -177,20 +169,20 @@ function update() {
 
 
 
-      if (parryRecoveryFrame > 15) {
+      if (playerFrame > 15) {
         playerState = "idle"
       }
-      parryRecoveryFrame++;
+      playerFrame++;
 
       break;
     case "stunned":
       color("cyan")
       text("Stunned!", 25, 90)
 
-      if (stunnedFrame > 120) {
+      if (playerFrame > 120) {
         playerState = "idle"
       }
-      stunnedFrame++;
+      playerFrame++;
       break;
 
 
@@ -203,7 +195,6 @@ function update() {
     case "idle":
       color("light_black")
       line(100 - 25, 50, 100 - 30, 70)
-
       let action = rndi(0, 30);
       switch (action) {
         case 0:
@@ -236,16 +227,16 @@ function update() {
       switch (blockAction) {
         case 0:
           enemyState = "startUp"
-          EstartUpFrame = 0
+          enemyFrame = 0
           break;
         case 1:
           enemyState = "startUp"
 
-          EstartUpFrame = 0
+          enemyFrame = 0
           break;
         case 2:
           enemyState = "parry"
-          EparryFrame = 0
+          enemyFrame = 0
           break;
 
         default:
@@ -263,12 +254,12 @@ function update() {
 
 
 
-      if (EstartUpFrame > 15) {
+      if (enemyFrame > 15) {
         EdidHit = false
         enemyState = "active"
-        EactiveFrame = 0
+        enemyFrame = 0
       }
-      EstartUpFrame++;
+      enemyFrame++;
 
       break;
     case "active":
@@ -278,11 +269,11 @@ function update() {
 
 
 
-      if (EactiveFrame > 5) {
+      if (enemyFrame > 5) {
         enemyState = "recovery"
-        ErecoveryFrame = 0
+        enemyFrame = 0
       }
-      EactiveFrame++;
+      enemyFrame++;
 
       break;
     case "recovery":
@@ -293,10 +284,10 @@ function update() {
 
 
 
-      if (ErecoveryFrame > 10) {
+      if (enemyFrame > 10) {
         enemyState = "idle"
       }
-      ErecoveryFrame++;
+      enemyFrame++;
 
       break;
     case "parry":
@@ -307,11 +298,11 @@ function update() {
 
 
 
-      if (EparryFrame > 5) {
+      if (enemyFrame > 5) {
         enemyState = "parryRecovery";
-        EparryRecoveryFrame = 0;
+        enemyFrame = 0;
       }
-      EparryFrame++;
+      enemyFrame++;
 
       break;
     case "parryRecovery":
@@ -322,20 +313,20 @@ function update() {
 
 
 
-      if (EparryRecoveryFrame > 15) {
+      if (enemyFrame > 15) {
         enemyState = "idle"
       }
-      EparryRecoveryFrame++;
+      enemyFrame++;
 
       break;
 
     case "stunned":
       color("red")
       text("Stunned!", 100 - 25, 90)
-      if (EstunnedFrame > 180) {
+      if (enemyFrame > 180) {
         enemyState = "idle"
       }
-      EstunnedFrame++;
+      enemyFrame++;
       break;
 
 
@@ -355,7 +346,7 @@ function update() {
       case "startUp":
         enemyHealth--;
         enemyState = "recovery"
-        ErecoveryFrame = 0
+        enemyFrame = 0
         break;
 
       case "active":
@@ -371,7 +362,7 @@ function update() {
 
       case "parry":
         playerState = "stunned"
-        stunnedFrame = 0
+        enemyFrame = 0
         enemyState = "idle"
         break;
 
@@ -394,7 +385,7 @@ function update() {
       case "startUp":
         playerHealth--;
         playerState = "recovery"
-        recoveryFrame = 0
+        enemyFrame = 0
         break;
 
       case "active":
@@ -410,7 +401,7 @@ function update() {
 
       case "parry":
         enemyState = "stunned"
-        EstunnedFrame = 0
+        enemyFrame = 0
         playerState = "idle"
         break;
 
