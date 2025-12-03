@@ -23,8 +23,11 @@ let target;
 
 let falling;
 
+let startInputLockout;
+
 function update() {
   if (!ticks) {
+    startInputLockout = 30; // half second lockout to prevent accidental bridge
     platforms = [vec(10, 55)];
     prevPlatformX = platforms[0].x;
     bridge = { angle: -PI / 2, length: 0 };
@@ -36,6 +39,10 @@ function update() {
     falling = false;
 
   }
+  if (startInputLockout > 0) {
+    startInputLockout--;
+  }
+
 
   if (scrollRemaining > 0) {
     let delta = Math.min(scrollSpeed, scrollRemaining);
@@ -43,12 +50,12 @@ function update() {
     platforms.forEach((p) => p.x -= delta);
   }
 
-  if (input.isJustPressed && !falling) {
+  if (input.isJustPressed && !falling && startInputLockout <= 0) {
     bridge.length = 0;
   }
 
 
-  if (input.isPressed && !falling) {
+  if (input.isPressed && !falling && startInputLockout <= 0) {
     bridge.angle = -PI / 2;
     bridge.length += 0.5;
   }
