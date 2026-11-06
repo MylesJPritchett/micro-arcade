@@ -1,0 +1,19 @@
+{
+  "name": "micro-arcade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A collection of one-button arcade mini-games built on crisp-game-lib",
+  "author": "Myles Pritchett <mylesjpritchett@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "node scripts/copy-crisp-game-lib.js",
+    "dev": "light-server -s public -w \"public/**/* # # reload\"",
+    "build": "node scripts/generate-game-list.js"
+  },
+  "dependencies": {
+    "crisp-game-lib": "1.5.0"
+  },
+  "devDependencies": {
+    "light-server": "2.9.1"
+  }
+}

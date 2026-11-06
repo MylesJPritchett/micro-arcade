@@ -2,12 +2,9 @@ node_modules/
 .vscode/
 .claude/
 .serena/
-package-lock.json
 npm-debug.log
-
-# Test coverage
-coverage/
-
-# Vitest snapshots (if any)
-**/__snapshots__/
 .aider*
+
+# Copied from crisp-game-lib on postinstall
+public/bundle.js
+public/bundle.d.ts
