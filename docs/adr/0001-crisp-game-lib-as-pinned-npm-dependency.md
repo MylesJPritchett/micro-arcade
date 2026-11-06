@@ -12,4 +12,4 @@ The Arcade used to live inside a GitHub fork of abagames/crisp-game-lib, which b
 ## Consequences
 
 - Engine fixes go upstream as a PR to abagames/crisp-game-lib, or, while one is pending, through `patch-package`. Re-vendoring or re-forking the engine goes against this decision.
-- Only the copy script knows where the bundle sits inside the package (`docs/bundle.js` in 1.5.0). If a future version moves it, update that script.
+- Only the copy script (`scripts/copy-crisp-game-lib.js`) knows where the bundle sits inside the package. If a future version moves it, update that script.

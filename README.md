@@ -13,11 +13,7 @@ Then open `http://localhost:4000` for the Dashboard, or `http://localhost:4000/?
 
 ## Add a Game
 
-1. Copy `public/_template` to `public/<name>` and write the Game in `main.js`.
-2. Add a preview GIF at `public/<name>/<name>.gif`.
-3. The Dashboard's Game list is regenerated on deploy (run `node scripts/generate-game-list.js` to update it locally).
-
-Keep a Game's `title` stable once it's published: High Scores are keyed on it.
+See "Add a Game" in [AGENTS.md](AGENTS.md); after adding one, run `npm run build` to regenerate the Dashboard's Game list.
 
 ## Credits
 

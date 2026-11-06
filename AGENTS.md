@@ -8,7 +8,7 @@ Use the glossary's terms (Arcade, Game, Dashboard, Game Card, High Score) in cod
 
 - `public/` is the published site: the Dashboard (`index.html`), one folder per Game, and `_template/`. Only site files belong here.
 - `docs/`, `GLOSSARY.md` and the agent docs stay outside `public/` so they are never served.
-- `scripts/generate-game-list.js` rewrites the `const games = [...]` line in `public/index.html` from the Game folders (skipping names starting with `_` or `ref_`). Netlify runs it on every deploy.
+- `scripts/generate-game-list.js` rewrites the `const games = [...]` line in `public/index.html` from the Game folders (skipping names starting with `_` or `ref_`). `npm run build` runs it, and Netlify runs `npm run build` on every deploy.
 - `public/bundle.js` and `public/bundle.d.ts` are copied from the `crisp-game-lib` package on `npm install` and are gitignored. If they are missing, run `npm install`.
 
 ## Develop
@@ -19,7 +19,7 @@ Use the glossary's terms (Arcade, Game, Dashboard, Game Card, High Score) in cod
 
 1. Copy `public/_template` to `public/<name>` and write the Game in `public/<name>/main.js`.
 2. Add a preview at `public/<name>/<name>.gif`; the Game Card shows it. With `isCapturing: true` (set in the template), crisp-game-lib records a GIF of play.
-3. The Dashboard picks the Game up on deploy. To see its Game Card locally, run `node scripts/generate-game-list.js` and commit the updated `public/index.html`.
+3. The Dashboard picks the Game up on deploy. To see its Game Card locally, run `npm run build` and commit the updated `public/index.html`.
 
 High Scores are stored in the player's `localStorage` under keys derived from each Game's `title`. Keep a published Game's `title` stable: renaming it wipes every player's High Score for that Game.
 
@@ -30,7 +30,7 @@ High Scores are stored in the player's `localStorage` under keys derived from ea
 3. Play every Game with `npm run dev` and check each one still feels the same and logs no console errors.
 4. Commit `package.json` and `package-lock.json` together.
 
-If the new version moves its bundle inside the package (`docs/bundle.js` in 1.5.0), update the postinstall copy script.
+If the new version moves its bundle inside the package, update the copy script (`scripts/copy-crisp-game-lib.js`); it is the only place that records where the bundle sits.
 
 ## Agent skills
 
