@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>crisp-game-lib</title>
+    <title>Micro Arcade</title>
     <meta
       name="viewport"
       content="width=device-width, height=device-height,
@@ -45,7 +45,7 @@
           window.addEventListener("load", onLoad);
         } else {
           // No game specified, show the dashboard
-          document.title = "Game Collection";
+          document.title = "Micro Arcade";
           const gameCards = games
             .map((game) => {
               const title = game.charAt(0).toUpperCase() + game.slice(1);
@@ -137,7 +137,7 @@
       text-align: center;
     }
 </style>
-<h1>Game Collection</h1>
+<h1>Micro Arcade</h1>
 <div class="grid-container">
     ${gameCards}
 </div>
